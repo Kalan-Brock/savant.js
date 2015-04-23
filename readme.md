@@ -4,6 +4,10 @@ Have you ever filled out a large form and accidently hit back, closed your tab, 
 
 savant.js solves this problem with easy to use, true form persistence.  Forms will remain as is for whatever amount of minutes you set (default 5).  You can even skip sensitive fields, such as password fields.
 
+## Requirements
+
+- jQuery
+
 ## Installation
 
 Add the script inside your head tags.
