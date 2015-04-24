@@ -14,23 +14,31 @@
 
             $('form.savant-form').submit(function( event ) {
                 document.cookie = "savant=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+                document.cookie = "savantcheckboxes=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
             });
 
-            var savant = base.getCookie();
+            var savant = base.getCookie("savant");
+            var savantcheckboxes = base.getCookie("savantcheckboxes");
 
             if(savant != "")
                 base.restoreFields(savant);
 
+            if(savantcheckboxes != "")
+                base.restoreCheckboxes(savantcheckboxes);
+
             $('.savant-form input, .savant-form textarea').focus(function(){
-                base.persistFields()
+                base.persistFields();
+                base.persistCheckboxes();
             });
 
             $('.savant-form input, .savant-form textarea').focusout(function(){
                 base.persistFields();
+                base.persistCheckboxes();
             });
 
             $('.savant-form select').change(function(){
-                base.persistFields()
+                base.persistFields();
+                base.persistCheckboxes();
             });
         };
 
@@ -45,15 +53,15 @@
             return JSON.stringify(json);
         }
 
-        base.setCookie = function(cvalue) {
+        base.setCookie = function(name, cvalue) {
             var d = new Date();
             d.setTime(d.getTime() + (base.options.expiresin * 1000));
             var expires = "expires="+d.toUTCString();
-            document.cookie = "savant" + "=" + cvalue + "; " + expires;
+            document.cookie = name + "=" + cvalue + "; " + expires;
         }
 
-        base.getCookie = function() {
-            var name = "savant" + "=";
+        base.getCookie = function(name) {
+            var name = name + "=";
             var ca = document.cookie.split(';');
             for(var i=0; i<ca.length; i++) {
                 var c = ca[i];
@@ -68,7 +76,7 @@
         {
             var form = base.convertFormToJSON('.savant-form');
 
-            base.setCookie(form);
+            base.setCookie("savant", form);
         }
 
         base.restoreFields = function(data){
@@ -78,6 +86,23 @@
                 if(!$('[name='+key+']').hasClass('savant-skip'))
                     $('[name='+key+']').val(value);
             });
+        }
+
+        base.persistCheckboxes = function()
+        {
+             var values = JSON.stringify($(".savant-form input[type='checkbox']").map(function(){return this.checked;}).get());
+
+             base.setCookie("savantcheckboxes", values);
+        }
+
+        base.restoreCheckboxes = function(data){
+            var json = $.parseJSON(data);
+            var checkboxes = $('.savant-form input[type="checkbox"]').toArray();
+
+            for(var x = 0; x < json.length; x++){
+                if(json[x])
+                    $(checkboxes[x]).attr('checked', true);
+            }
         }
 
         base.init();
