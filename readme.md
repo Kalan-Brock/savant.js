@@ -16,12 +16,23 @@ Add the script inside your head tags.
 <script src="/js/savant.js"></script>
 ```
 
+Before your body close tag (</body>) add this script.
+
+```
+<script>
+	$(function(){
+		$('.savant-form').savantForm({
+			expiresin: 300 //number of seconds to persist (default 5 minutes)
+		});
+	});
+</script>
+```
+
+
 ## Usage
 
 1.  Add the class "savant-form" to any form you wish to have persistence.
 2.  Add the class "savant-skip" to any field you wish to not persist.
-
-You can set the expire time in the js file at the top.
 
 
 ## License
