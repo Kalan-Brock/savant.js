@@ -14,10 +14,10 @@ savant.js solves this problem with easy to use, true form persistence.  Forms wi
 Add the script inside your head tags.
 
 ```
-<script src="/js/savant.js"></script>
+<script src="/js/savant.min.js"></script>
 ```
 
-Before your body close tag (</body>) add this script.
+Before your body close tag add this script.
 
 ```
 <script>
