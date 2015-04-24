@@ -15,10 +15,12 @@
             $('form.savant-form').submit(function( event ) {
                 document.cookie = "savant=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
                 document.cookie = "savantcheckboxes=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+                document.cookie = "savantradios=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
             });
 
             var savant = base.getCookie("savant");
             var savantcheckboxes = base.getCookie("savantcheckboxes");
+            var savantradios = base.getCookie("savantradios");
 
             if(savant != "")
                 base.restoreFields(savant);
@@ -26,19 +28,25 @@
             if(savantcheckboxes != "")
                 base.restoreCheckboxes(savantcheckboxes);
 
+            if(savantradios != "")
+                base.restoreRadios(savantradios);
+
             $('.savant-form input, .savant-form textarea').focus(function(){
                 base.persistFields();
                 base.persistCheckboxes();
+                base.persistRadios();
             });
 
             $('.savant-form input, .savant-form textarea').focusout(function(){
                 base.persistFields();
                 base.persistCheckboxes();
+                base.persistRadios();
             });
 
             $('.savant-form select').change(function(){
                 base.persistFields();
                 base.persistCheckboxes();
+                base.persistRadios();
             });
         };
 
@@ -102,6 +110,23 @@
             for(var x = 0; x < json.length; x++){
                 if(json[x])
                     $(checkboxes[x]).attr('checked', true);
+            }
+        }
+
+        base.persistRadios = function()
+        {
+             var values = JSON.stringify($(".savant-form input[type='radio']").map(function(){return this.checked;}).get());
+
+             base.setCookie("savantradios", values);
+        }
+
+        base.restoreRadios = function(data){
+            var json = $.parseJSON(data);
+            var radios = $('.savant-form input[type="radio"]').toArray();
+
+            for(var x = 0; x < json.length; x++){
+                if(json[x])
+                    $(radios[x]).attr('checked', true);
             }
         }
 
