@@ -2,7 +2,7 @@
 
 Have you ever filled out a large form and accidently hit back, closed your tab, or even closed your browser?
 
-savant.js solves this problem with easy to use, true form persistence.  Forms will remain as is for whatever amount of seconds you set (default 320).  You can even skip sensitive fields, such as password fields.
+savant.js solves this problem with easy to use, true form persistence.  Forms will remain as is for whatever amount of seconds you set (default 300).  You can even skip sensitive fields, such as password fields.
 
 ## Requirements
 

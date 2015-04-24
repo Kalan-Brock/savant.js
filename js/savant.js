@@ -1,6 +1,6 @@
 jQuery(function($){
 
-	var expiresin = 320;  //time in seconds
+	var expiresin = 300;  //time in seconds
 
 	function ConvertFormToJSON(form){
 	    var array = $(form).serializeArray();
@@ -15,7 +15,7 @@ jQuery(function($){
 
 	function setCookie(cvalue) {
 	    var d = new Date();
-	    d.setTime(d.getTime() + (expiresin * 60 * 1000));
+	    d.setTime(d.getTime() + (expiresin * 1000));
 	    var expires = "expires="+d.toUTCString();
 	    document.cookie = "savant" + "=" + cvalue + "; " + expires;
 	}
