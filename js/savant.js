@@ -1,4 +1,5 @@
 (function($){
+
     $.savantForm = function(el, options){
 
         var base = this;
@@ -10,6 +11,10 @@
         
         base.init = function(){
             base.options = $.extend({},$.savantForm.defaultOptions, options);
+
+            $('form.savant-form').submit(function( event ) {
+                document.cookie = "savant=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+            });
 
             var savant = base.getCookie();
 
@@ -87,9 +92,4 @@
             (new $.savantForm(this, options));
         });
     };
-
-    $("form.savant-form").submit(function( event ) {
-        document.cookie = "savant=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-    });
-    
 })(jQuery);
