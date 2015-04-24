@@ -83,8 +83,8 @@
             var json = $.parseJSON(data);
 
             $.each(json, function(key, value){
-                if(!$('[name='+key+']').hasClass('savant-skip'))
-                    $('[name='+key+']').val(value);
+                if(!$('[name="'+key+'"]').hasClass('savant-skip'))
+                    $('[name="'+key+'"]').val(value);
             });
         }
 
