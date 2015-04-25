@@ -108,7 +108,7 @@
             var checkboxes = $('.savant-form input[type="checkbox"]').toArray();
 
             for(var x = 0; x < json.length; x++){
-                if(json[x])
+                if(json[x] && !$(checkboxes[x]).hasClass('savant-skip'))
                     $(checkboxes[x]).attr('checked', true);
             }
         }
@@ -125,7 +125,7 @@
             var radios = $('.savant-form input[type="radio"]').toArray();
 
             for(var x = 0; x < json.length; x++){
-                if(json[x])
+                if(json[x] && !$(radios[x]).hasClass('savant-skip'))
                     $(radios[x]).attr('checked', true);
             }
         }
