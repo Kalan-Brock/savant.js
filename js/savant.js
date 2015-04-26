@@ -43,7 +43,13 @@
                 base.persistRadios();
             });
 
-            $('.savant-form select').change(function(){
+            $('.savant-form input, .savant-form textarea, .savant-form select').change(function(){
+                base.persistFields();
+                base.persistCheckboxes();
+                base.persistRadios();
+            });
+
+            $('.savant-form input').keyup(function(e){
                 base.persistFields();
                 base.persistCheckboxes();
                 base.persistRadios();
