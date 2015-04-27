@@ -1,5 +1,7 @@
 (function($){
 
+    'use strict';
+
     $.savantForm = function(el, options){
 
         var base = this;
@@ -56,17 +58,6 @@
             });
         };
 
-        base.convertFormToJSON = function(form){
-            var array = $(form).serializeArray();
-            var json = {};
-            
-            $.each(array, function() {
-                json[this.name] = this.value || '';
-            });
-            
-            return JSON.stringify(json);
-        }
-
         base.setCookie = function(name, cvalue) {
             var d = new Date();
             d.setTime(d.getTime() + (base.options.expiresin * 1000));
@@ -88,18 +79,22 @@
 
         base.persistFields = function()
         {
-            var form = base.convertFormToJSON('.savant-form');
+            var values = JSON.stringify($(".savant-form input[type='text'], .savant-form input[type='email'], .savant-form input[type='password'], .savant-form input[type='textarea'], .savant-form input[type='select'], .savant-form input[type='date'], .savant-form input[type='color'], .savant-form input[type='range'], .savant-form input[type='month'], .savant-form input[type='week'], .savant-form input[type='time'], .savant-form input[type='datetime'], .savant-form input[type='datetime-local'], .savant-form input[type='search'], .savant-form input[type='tel'], .savant-form input[type='url'], savant-form input[type='number']").map(function(){return $(this).val()}).get());
 
-            base.setCookie("savant", form);
+            console.log(values);
+
+            base.setCookie("savant", values);
         }
 
         base.restoreFields = function(data){
             var json = $.parseJSON(data);
+            var textfields = $(".savant-form input[type='text'], .savant-form input[type='email'], .savant-form input[type='password'], .savant-form input[type='textarea'], .savant-form input[type='select'], .savant-form input[type='date'], .savant-form input[type='color'], .savant-form input[type='range'], .savant-form input[type='month'], .savant-form input[type='week'], .savant-form input[type='time'], .savant-form input[type='datetime'], .savant-form input[type='datetime-local'], .savant-form input[type='search'], .savant-form input[type='tel'], .savant-form input[type='url'], savant-form input[type='number']").toArray();
 
-            $.each(json, function(key, value){
-                if(!$('[name="'+key+'"]').hasClass('savant-skip') && !$('[type="checkbox"]') && !$('[type="radio"]'))
-                    $('[name="'+key+'"]').val(value);
-            });
+            for(var x = 0; x < json.length; x++){
+                if(json[x] && !$(textfields[x]).hasClass('savant-skip')){
+                    $(textfields[x]).val(json[x]);
+                }
+            }
         }
 
         base.persistCheckboxes = function()
