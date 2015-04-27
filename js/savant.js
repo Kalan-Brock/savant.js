@@ -81,8 +81,6 @@
         {
             var values = JSON.stringify($(".savant-form input[type='text'], .savant-form input[type='email'], .savant-form input[type='password'], .savant-form input[type='textarea'], .savant-form input[type='select'], .savant-form input[type='date'], .savant-form input[type='color'], .savant-form input[type='range'], .savant-form input[type='month'], .savant-form input[type='week'], .savant-form input[type='time'], .savant-form input[type='datetime'], .savant-form input[type='datetime-local'], .savant-form input[type='search'], .savant-form input[type='tel'], .savant-form input[type='url'], savant-form input[type='number']").map(function(){return $(this).val()}).get());
 
-            console.log(values);
-
             base.setCookie("savant", values);
         }
 
