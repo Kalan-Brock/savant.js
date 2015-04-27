@@ -63,7 +63,7 @@
             d.setTime(d.getTime() + (base.options.expiresin * 1000));
             var expires = "expires="+d.toUTCString();
             document.cookie = name + "=" + cvalue + "; " + expires;
-        }
+        };
 
         base.getCookie = function(name) {
             var name = name + "=";
@@ -75,32 +75,32 @@
             }
 
             return "";
-        }
+        };
 
         base.persistFields = function()
         {
-            var values = JSON.stringify($(".savant-form textarea, .savant-form input[type='text'], .savant-form input[type='email'], .savant-form input[type='password'], .savant-form input[type='select'], .savant-form input[type='date'], .savant-form input[type='color'], .savant-form input[type='range'], .savant-form input[type='month'], .savant-form input[type='week'], .savant-form input[type='time'], .savant-form input[type='datetime'], .savant-form input[type='datetime-local'], .savant-form input[type='search'], .savant-form input[type='tel'], .savant-form input[type='url'], savant-form input[type='number']").map(function(){return $(this).val()}).get());
+            var values = JSON.stringify($(".savant-form textarea, .savant-form input[type='text'], .savant-form input[type='email'], .savant-form input[type='password'], .savant-form select, .savant-form input[type='date'], .savant-form input[type='color'], .savant-form input[type='range'], .savant-form input[type='month'], .savant-form input[type='week'], .savant-form input[type='time'], .savant-form input[type='datetime'], .savant-form input[type='datetime-local'], .savant-form input[type='search'], .savant-form input[type='tel'], .savant-form input[type='url'], savant-form input[type='number']").map(function(){return $(this).val()}).get());
 
             base.setCookie("savant", values);
-        }
+        };
 
         base.restoreFields = function(data){
             var json = $.parseJSON(data);
-            var textfields = $(".savant-form textarea, .savant-form input[type='text'], .savant-form input[type='email'], .savant-form input[type='password'], .savant-form input[type='select'], .savant-form input[type='date'], .savant-form input[type='color'], .savant-form input[type='range'], .savant-form input[type='month'], .savant-form input[type='week'], .savant-form input[type='time'], .savant-form input[type='datetime'], .savant-form input[type='datetime-local'], .savant-form input[type='search'], .savant-form input[type='tel'], .savant-form input[type='url'], savant-form input[type='number']").toArray();
+            var textfields = $(".savant-form textarea, .savant-form input[type='text'], .savant-form input[type='email'], .savant-form input[type='password'], .savant-form select, .savant-form input[type='date'], .savant-form input[type='color'], .savant-form input[type='range'], .savant-form input[type='month'], .savant-form input[type='week'], .savant-form input[type='time'], .savant-form input[type='datetime'], .savant-form input[type='datetime-local'], .savant-form input[type='search'], .savant-form input[type='tel'], .savant-form input[type='url'], savant-form input[type='number']").toArray();
 
             for(var x = 0; x < json.length; x++){
                 if(json[x] && !$(textfields[x]).hasClass('savant-skip')){
                     $(textfields[x]).val(json[x]);
                 }
             }
-        }
+        };
 
         base.persistCheckboxes = function()
         {
              var values = JSON.stringify($(".savant-form input[type='checkbox']").map(function(){return this.checked;}).get());
 
              base.setCookie("savantcheckboxes", values);
-        }
+        };
 
         base.restoreCheckboxes = function(data){
             var json = $.parseJSON(data);
@@ -111,7 +111,7 @@
                     $(checkboxes[x]).attr('checked', true);
                 }
             }
-        }
+        };
 
         base.persistRadios = function()
         {
@@ -128,7 +128,7 @@
                 if(json[x] && !$(radios[x]).hasClass('savant-skip'))
                     $(radios[x]).attr('checked', true);
             }
-        }
+        };
 
         base.init();
     };
