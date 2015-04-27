@@ -97,7 +97,7 @@
             var json = $.parseJSON(data);
 
             $.each(json, function(key, value){
-                if(!$('[name="'+key+'"]').hasClass('savant-skip'))
+                if(!$('[name="'+key+'"]').hasClass('savant-skip') && !$('[type="checkbox"]') && !$('[type="radio"]'))
                     $('[name="'+key+'"]').val(value);
             });
         }
@@ -114,8 +114,9 @@
             var checkboxes = $('.savant-form input[type="checkbox"]').toArray();
 
             for(var x = 0; x < json.length; x++){
-                if(json[x] && !$(checkboxes[x]).hasClass('savant-skip'))
+                if(json[x] && !$(checkboxes[x]).hasClass('savant-skip')){
                     $(checkboxes[x]).attr('checked', true);
+                }
             }
         }
 
