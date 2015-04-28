@@ -7,7 +7,6 @@ savant.js solves this problem with easy to use, true form persistence.  Forms wi
 ## Requirements
 
 - jQuery
-- For fields to persist, they must have a name attribute.
 
 ## Installation
 
