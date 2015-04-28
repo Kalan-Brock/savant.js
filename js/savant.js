@@ -24,13 +24,13 @@
             var savantcheckboxes = base.getCookie("savantcheckboxes");
             var savantradios = base.getCookie("savantradios");
 
-            if(savant != "")
+            if(savant !== "")
                 base.restoreFields(savant);
 
-            if(savantcheckboxes != "")
+            if(savantcheckboxes !== "")
                 base.restoreCheckboxes(savantcheckboxes);
 
-            if(savantradios != "")
+            if(savantradios !== "")
                 base.restoreRadios(savantradios);
 
             $('.savant-form input, .savant-form textarea').focus(function(){
