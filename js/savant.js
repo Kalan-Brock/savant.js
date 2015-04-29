@@ -1,3 +1,4 @@
+/* global jQuery */
 (function($){
 
     'use strict';
@@ -79,7 +80,7 @@
 
         base.persistFields = function()
         {
-            var values = JSON.stringify($(".savant-form textarea, .savant-form input[type='text'], .savant-form input[type='email'], .savant-form input[type='password'], .savant-form select, .savant-form input[type='date'], .savant-form input[type='color'], .savant-form input[type='range'], .savant-form input[type='month'], .savant-form input[type='week'], .savant-form input[type='time'], .savant-form input[type='datetime'], .savant-form input[type='datetime-local'], .savant-form input[type='search'], .savant-form input[type='tel'], .savant-form input[type='url'], savant-form input[type='number']").map(function(){return $(this).val()}).get());
+            var values = JSON.stringify($(".savant-form textarea, .savant-form input[type='text'], .savant-form input[type='email'], .savant-form input[type='password'], .savant-form select, .savant-form input[type='date'], .savant-form input[type='color'], .savant-form input[type='range'], .savant-form input[type='month'], .savant-form input[type='week'], .savant-form input[type='time'], .savant-form input[type='datetime'], .savant-form input[type='datetime-local'], .savant-form input[type='search'], .savant-form input[type='tel'], .savant-form input[type='url'], savant-form input[type='number']").map(function(){return $(this).val(); }).get());
 
             base.setCookie("savant", values);
         };
@@ -118,7 +119,7 @@
              var values = JSON.stringify($(".savant-form input[type='radio']").map(function(){return this.checked;}).get());
 
              base.setCookie("savantradios", values);
-        }
+        };
 
         base.restoreRadios = function(data){
             var json = $.parseJSON(data);
