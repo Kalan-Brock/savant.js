@@ -1,0 +1,17 @@
+{
+    "name": "savantjs",
+    "version": "0.0.1",
+    "main": "dist/your-awesome-js-module.js",
+    "ignore": [
+        "js",
+        "index.html",
+        "favicon.ico",
+        ".gitignore",
+        "bower.json",
+        "LICENSE.md",
+        "README.md"
+    ],
+    "dependencies": {
+        "jquery": ">=1.10.2"
+    }
+}
