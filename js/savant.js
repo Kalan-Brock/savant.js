@@ -16,45 +16,36 @@
 
             $('form.savant-form').submit(function( event ) {
                 document.cookie = "savant=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-                document.cookie = "savantcheckboxes=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-                document.cookie = "savantradios=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+                document.cookie = "savantchecksandradios=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
             });
 
             var savant = base.getCookie("savant");
-            var savantcheckboxes = base.getCookie("savantcheckboxes");
-            var savantradios = base.getCookie("savantradios");
+            var savantchecksandradios = base.getCookie("savantchecksandradios");
 
             if(savant !== "")
                 base.restoreFields(savant);
 
-            if(savantcheckboxes !== "")
-                base.restoreCheckboxes(savantcheckboxes);
-
-            if(savantradios !== "")
-                base.restoreRadios(savantradios);
+            if(savantchecksandradios !== "")
+                base.restoreChecksAndRadios(savantchecksandradios);
 
             $('.savant-form input, .savant-form textarea').focus(function(){
                 base.persistFields();
-                base.persistCheckboxes();
-                base.persistRadios();
+                base.persistChecksAndRadios();
             });
 
             $('.savant-form input, .savant-form textarea').focusout(function(){
                 base.persistFields();
-                base.persistCheckboxes();
-                base.persistRadios();
+                base.persistChecksAndRadios();
             });
 
             $('.savant-form input, .savant-form textarea, .savant-form select').change(function(){
                 base.persistFields();
-                base.persistCheckboxes();
-                base.persistRadios();
+                base.persistChecksAndRadios();
             });
 
             $('.savant-form input').keyup(function(e){
                 base.persistFields();
-                base.persistCheckboxes();
-                base.persistRadios();
+                base.persistChecksAndRadios();
             });
         };
 
@@ -95,38 +86,21 @@
             }
         };
 
-        base.persistCheckboxes = function()
+        base.persistChecksAndRadios = function()
         {
-             var values = JSON.stringify($(".savant-form input[type='checkbox']").map(function(){return this.checked;}).get());
+             var values = JSON.stringify($(".savant-form input[type='checkbox'], .savant-form input[type='radio']").map(function(){return this.checked;}).get());
 
-             base.setCookie("savantcheckboxes", values);
+             base.setCookie("savantchecksandradios", values);
         };
 
-        base.restoreCheckboxes = function(data){
+        base.restoreChecksAndRadios = function(data){
             var json = $.parseJSON(data);
-            var checkboxes = $('.savant-form input[type="checkbox"]').toArray();
+            var checkboxes = $('.savant-form input[type="checkbox"], .savant-form input[type="radio"]').toArray();
 
             for(var x = 0; x < json.length; x++){
                 if(json[x] && !$(checkboxes[x]).hasClass('savant-skip')){
                     $(checkboxes[x]).attr('checked', true);
                 }
-            }
-        };
-
-        base.persistRadios = function()
-        {
-             var values = JSON.stringify($(".savant-form input[type='radio']").map(function(){return this.checked;}).get());
-
-             base.setCookie("savantradios", values);
-        };
-
-        base.restoreRadios = function(data){
-            var json = $.parseJSON(data);
-            var radios = $('.savant-form input[type="radio"]').toArray();
-
-            for(var x = 0; x < json.length; x++){
-                if(json[x] && !$(radios[x]).hasClass('savant-skip'))
-                    $(radios[x]).attr('checked', true);
             }
         };
 
