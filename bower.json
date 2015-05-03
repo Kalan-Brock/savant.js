@@ -2,6 +2,7 @@
     "name": "savantjs",
     "version": "0.0.1",
     "main": "dist/savant.js",
+    "description": "A simple jQuery plugin for easy to use form persistence.",
     "ignore": [
         "js",
         "index.html",
