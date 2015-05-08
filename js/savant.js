@@ -14,7 +14,7 @@
         base.init = function(){
             base.options = $.extend({},$.savantForm.defaultOptions, options);
 
-            $('form.savant-form').submit(function( event ) {
+            $('form.savant-form').submit(function() {
                 document.cookie = "savant=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
                 document.cookie = "savantchecksandradios=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
             });
@@ -43,7 +43,7 @@
                 base.persistChecksAndRadios();
             });
 
-            $('.savant-form input').keyup(function(e){
+            $('.savant-form input').keyup(function(){
                 base.persistFields();
                 base.persistChecksAndRadios();
             });
